@@ -11,6 +11,18 @@ const app = express();
 
 mongoose.connect('mongodb://localhost:27017/mydb');
 
+app.use(express.urlencoded({
+  extended: true,
+}));
+app.use(express.json());
+
+app.use((req, res, next) => {
+  req.body.user = {
+    _id: '65c4e3fc65d0c3cb6c812b46',
+  };
+  next();
+});
+
 app.use('/cards', cardsRoutes);
 app.use('/users', usersRoutes);
 
