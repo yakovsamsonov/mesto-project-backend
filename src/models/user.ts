@@ -1,10 +1,12 @@
-import { model, Schema } from 'mongoose';
+import mongoose, { model, Schema } from 'mongoose';
 
 interface IUser {
   name: string,
   about: string,
   avatar: string
 }
+
+export type TUserDocument = IUser & { _id: mongoose.Types.ObjectId }
 
 const userSchema = new Schema<IUser>({
   name: {
@@ -25,4 +27,4 @@ const userSchema = new Schema<IUser>({
   },
 });
 
-export default model<IUser>('user', userSchema);
+export const User = model<IUser>('user', userSchema);
